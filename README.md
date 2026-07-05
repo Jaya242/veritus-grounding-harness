@@ -98,6 +98,24 @@ Every fabricated claim is caught under conservative policy. Precision is limited
 - **No adversarial claim generation.** Every fabricated claim was human-written. A stronger evaluation would include LLM-generated distractors calibrated to be plausible.
 - **Single evaluator.** Claim labels were written by one person (the author). Two-annotator agreement on the boundary cases (subtle scope_overreach vs. paraphrase) would tighten the ground truth.
 
+ ### Selected failure cases
+
+**False alarm — grounded paraphrase flagged as WEAK (C007)**
+- Claim: "RAG sets a new state of the art on three open-domain question answering tasks."
+- Verdict: WEAK (sim=0.46, NLI=neutral 0.97)
+- What went wrong: The abstract says "set the state-of-the-art on three open domain QA tasks" — nearly identical wording. NLI still returned neutral with high confidence. This is the dominant failure mode: MNLI-trained cross-encoders are conservative even on lexically overlapping paraphrases.
+
+  **False alarm — threshold-tuning miss (C021)**
+- Claim: "On a controlled financial QA dataset with GPT-3.5-turbo,ECLIPSEachieves ROC AUC of 0.89 and average precision of 0.90"
+- Verdict: WEAK (sim=0.46, NLI=entailment 1.00)
+- What went wrong: NLI correctly returned entailment with 1.00 confidence, but similarity (0.46) fell below the sim_high=0.55 threshold. A pure threshold-tuning issue — lowering sim_high to 0.40 would flip this to GROUNDED. Suggests a defensible v3 improvement.
+
+**True positive — subtle numeric distortion caught (C023)**
+- Claim: "On the financial QA benchmark, ECLIPSE achieves ROC AUC of 0.94 and average precision of 0.95"
+- Verdict: UNGROUNDED (sim=0.38, NLI=contradiction 0.59)
+- Why it worked: NLI detected the swapped numbers (0.89 → 0.94) as a contradiction, though at only 0.59 confidence — the subtlest fabrication in the dataset. Borderline but correct.
+  
+
 ## Repo layout
 
 ```
