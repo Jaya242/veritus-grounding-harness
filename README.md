@@ -134,3 +134,5 @@ veritus-grounding-harness/
 ├── requirements.txt
 └── README.md
 ```
+ ## Contact
+  Jaya Arora — jayaarora2402@gmail.com — [LinkedIn](https://www.linkedin.com/in/jaya-arora-6892a93a0/)
