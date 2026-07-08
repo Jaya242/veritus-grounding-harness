@@ -1,3 +1,14 @@
+---
+title: Veritus Grounding Harness
+emoji: 📚
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: "5.38.2"
+app_file: app.py
+pinned: false
+---
+
 # Grounding Harness for Research-Paper Claims
 
 A small tool that checks whether a factual claim about a research paper is actually supported by that paper's abstract. Built as a proof-of-concept for the "hallucination-free, source-verified" property that Veritus.ai advertises.
