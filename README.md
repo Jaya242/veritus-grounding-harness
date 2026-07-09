@@ -1,5 +1,7 @@
 # Grounding Harness for Research-Paper Claims
 
+**Live demo:** https://veritus-grounding-harness.streamlit.app/
+
 A small tool that checks whether a factual claim about a research paper is actually supported by that paper's abstract. Built as a proof-of-concept for the "hallucination-free, source-verified" property that Veritus.ai advertises.
 
 ## The problem
